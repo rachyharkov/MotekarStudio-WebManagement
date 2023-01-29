@@ -1,70 +1,57 @@
-@extends('layouts.auth')
+<x-guest-layout>
+    <x-jet-authentication-card>
+        <x-slot name="logo">
+            <x-jet-authentication-card-logo />
+        </x-slot>
 
-@section('title', __('Confirm Password'))
+        <div x-data="{ recovery: false }">
+            <div class="mb-4 text-sm text-gray-600" x-show="! recovery">
+                {{ __('Please confirm access to your account by entering the authentication code provided by your authenticator application.') }}
+            </div>
 
-@push('css')
-    <link rel="stylesheet" href="{{ asset('mazer') }}/css/pages/auth.css">
-@endpush
+            <div class="mb-4 text-sm text-gray-600" x-show="recovery">
+                {{ __('Please confirm access to your account by entering one of your emergency recovery codes.') }}
+            </div>
 
-@section('content')
-    <div class="row h-100">
-        <div class="col-lg-7 col-12">
-            <div id="auth-left">
-                <div class="auth-logo" class="mb-0">
-                    <a href="/">
-                        <img src="{{ asset('mazer') }}/images/logo/logo.svg" alt="Logo">
-                    </a>
+            <x-jet-validation-errors class="mb-4" />
+
+            <form method="POST" action="{{ route('two-factor.login') }}">
+                @csrf
+
+                <div class="mt-4" x-show="! recovery">
+                    <x-jet-label for="code" value="{{ __('Code') }}" />
+                    <x-jet-input id="code" class="block mt-1 w-full" type="text" inputmode="numeric" name="code" autofocus x-ref="code" autocomplete="one-time-code" />
                 </div>
 
-                <h1 class="auth-title">{{ __('Two Factor Challenge.') }}</h1>
+                <div class="mt-4" x-show="recovery">
+                    <x-jet-label for="recovery_code" value="{{ __('Recovery Code') }}" />
+                    <x-jet-input id="recovery_code" class="block mt-1 w-full" type="text" name="recovery_code" x-ref="recovery_code" autocomplete="one-time-code" />
+                </div>
 
-                <p class="auth-subtitle mb-3">{{ __('Enter the authentication code to log in.') }}</p>
+                <div class="flex items-center justify-end mt-4">
+                    <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
+                                    x-show="! recovery"
+                                    x-on:click="
+                                        recovery = true;
+                                        $nextTick(() => { $refs.recovery_code.focus() })
+                                    ">
+                        {{ __('Use a recovery code') }}
+                    </button>
 
-                @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible show fade">
-                        <ul class="ms-0 mb-0">
-                            @foreach ($errors->all() as $error)
-                                <li>
-                                    <p>{{ $error }}</p>
-                                </li>
-                            @endforeach
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </ul>
-                    </div>
-                @endif
+                    <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
+                                    x-show="recovery"
+                                    x-on:click="
+                                        recovery = false;
+                                        $nextTick(() => { $refs.code.focus() })
+                                    ">
+                        {{ __('Use an authentication code') }}
+                    </button>
 
-                <form method="POST" action="{{ route('two-factor.login') }}">
-                    @csrf
-
-                    <div class="form-group position-relative has-icon-left mb-4">
-                        <input type="text" class="form-control form-control-xl @error('code') is-invalid @enderror"
-                            placeholder="Code" name="code" autocomplete="code">
-                        <div class="form-control-icon">
-                            <i class="bi bi-shield-lock"></i>
-                        </div>
-                    </div>
-
-                    <div class="divider">
-                        <div class="divider-text">{{ __('Or you can enter one of the recovery codes') }}</div>
-                    </div>
-
-                    <div class="form-group position-relative has-icon-left mb-4">
-                        <input type="text" class="form-control form-control-xl @error('recovery_code') is-invalid @enderror"
-                            placeholder="Recovery Code" name="recovery_code" autocomplete="recovery_code">
-                        <div class="form-control-icon">
-                            <i class="bi bi-shield-lock"></i>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-primary btn-block btn-lg shadow-lg mt-3">{{ __('Submit') }}</button>
-                </form>
-            </div>
+                    <x-jet-button class="ml-4">
+                        {{ __('Login') }}
+                    </x-jet-button>
+                </div>
+            </form>
         </div>
-
-        <div class="col-lg-5 d-none d-lg-block">
-            <div id="auth-right">
-            </div>
-        </div>
-    </div>
-
-@endsection
+    </x-jet-authentication-card>
+</x-guest-layout>
