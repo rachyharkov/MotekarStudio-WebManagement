@@ -17,6 +17,10 @@ return [
 
     'stack' => 'livewire',
 
+    'prefix' => 'web_management',
+
+
+
     /*
      |--------------------------------------------------------------------------
      | Jetstream Route Middleware

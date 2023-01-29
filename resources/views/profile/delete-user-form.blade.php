@@ -29,7 +29,7 @@
                                 wire:model.defer="password"
                                 wire:keydown.enter="deleteUser" />
 
-                    <x-maz-input-error for="password" class="mt-2" />
+                    <x-admin.maz-input-error for="password" class="mt-2" />
                 </div>
             </x-slot>
 

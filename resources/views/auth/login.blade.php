@@ -1,4 +1,6 @@
-<x-guest-layout>
+@extends('admin.layouts.guest')
+
+@section('content')
 
     <div id="auth-left">
         <div class="auth-logo">
@@ -41,16 +43,5 @@
             </div>
             <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
         </form>
-        <div class="text-center mt-5 text-lg fs-4">
-            @if (Route::has('register'))
-            <p class="text-gray-600">Don't have an account? <a href="{{route('register')}}" class="font-bold">Sign
-                    up</a>.</p>
-            @endif
-
-
-            @if (Route::has('password.request'))
-            <p><a class="font-bold" href="{{route('password.request')}}">Forgot password?</a>.</p>
-            @endif
-        </div>
     </div>
-</x-guest-layout>
+@endsection

@@ -8,30 +8,29 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Styles -->
-        @include('layouts.partials.styles')
+        @include('admin.layouts.partials.styles')
     </head>
     <body>
         <div id="app">
-            @include('layouts.partials.sidebar')
-            
+            @include('admin.layouts.partials.sidebar')
+
             <div id="main" class='layout-navbar'>
-                @include('layouts.partials.header')
+                @include('admin.layouts.partials.header')
                 <div id="main-content">
 
                     <div class="page-heading">
                         <div class="page-title">
-                            {{ $header }}
+                            @yield('header')
                         </div>
-                        {{ $slot }}
+                        @yield('content')
                     </div>
-
-                    @include('layouts.partials.footer')
+                    @include('admin.layouts.partials.footer')
                 </div>
             </div>
         </div>
 
         <!-- Scripts -->
-        @include('layouts.partials.scripts')
+        @include('admin.layouts.partials.scripts')
 
     </body>
 </html>

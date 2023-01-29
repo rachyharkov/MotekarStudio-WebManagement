@@ -4,6 +4,7 @@
 <!-- Vendors -->
 <link rel="stylesheet" href="{{ asset('/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
 <link rel="stylesheet" href="{{ asset('/vendors/bootstrap-icons/bootstrap-icons.css') }}">
+<link rel="stylesheet" href="{{ url('/vendors/iconly/bold.css') }}">
 
 
 <!-- Styles -->

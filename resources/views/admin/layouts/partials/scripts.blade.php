@@ -9,4 +9,6 @@
 @livewireScripts
 <script src="{{ asset('/js/main.js') }}"></script>
 
+@stack('js')
+
 {{ $script ?? ''}}

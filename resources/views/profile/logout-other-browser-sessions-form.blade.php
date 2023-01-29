@@ -10,7 +10,7 @@
             <div class='alert alert-light-warning'>
                 {{ __('If necessary, you may logout of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.') }}
             </div>
-            
+
             @if (count($this->sessions) > 0)
                 <div class="mt-5 space-y-6">
                     <!-- Other Browser Sessions -->
@@ -51,15 +51,15 @@
             @endif
 
             <div class="mt-5">
-            
-                <x-maz-alert class="ml-3" color="success" on="loggedOut">
+
+                <x-admin.maz-alert class="ml-3" color="success" on="loggedOut">
                     {{ __('Done.') }}
-                </x-maz-alert>
+                </x-admin.maz-alert>
                 <button wire:click="confirmLogout" wire:loading.attr="disabled" class='btn btn-danger'>
                     {{ __('Logout Other Browser Sessions') }}
                 </button>
-                
-                
+
+
                 <!-- Logout Other Devices Confirmation Modal -->
                 <x-jet-dialog-modal wire:model="confirmingLogout">
                     <x-slot name="title">
@@ -76,7 +76,7 @@
                                         wire:model.defer="password"
                                         wire:keydown.enter="logoutOtherBrowserSessions" />
 
-                            <x-maz-input-error for="password" class="mt-2" />
+                            <x-admin.maz-input-error for="password" class="mt-2" />
                         </div>
                     </x-slot>
 
