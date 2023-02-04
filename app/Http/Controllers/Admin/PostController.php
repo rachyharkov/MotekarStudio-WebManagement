@@ -45,8 +45,8 @@ class PostController extends Controller
         if($request->hasFile('foto_sampul')) {
             $image = $request->file('foto_sampul');
             $image_name = time() . '.' . $image->getClientOriginalExtension();
-            // upload to storage/app/public/post
-            Storage::disk('public')->put('posts_image/' . $image_name, file_get_contents($image));
+            $image->move(public_path('/images/posts'), $image_name);
+
         }
 
         Post::create([
@@ -67,11 +67,6 @@ class PostController extends Controller
         ]);
     }
 
-    public function edit($id)
-    {
-        // return view('admin.post.edit');
-    }
-
     public function update(Request $request)
     {
         $request->validate([
@@ -86,15 +81,24 @@ class PostController extends Controller
 
         // dd($request->all());
 
+
         $post = Post::find($request->post_id);
 
         $image_name = $post->foto_sampul;
         if($request->hasFile('foto_sampul')) {
+            // dd($request->all());
+
             $image = $request->file('foto_sampul');
-            $image_name = time() . '.' . $image->getClientOriginalExtension();
-            // upload to storage/app/public/post
-            Storage::disk('public')->put('posts_image/' . $image_name, file_get_contents($image));
-            Storage::disk('public')->delete('posts_image/' . $post->foto_sampul);
+            $image_name = date('Y-m-d').time() . '.' . $image->getClientOriginalExtension();
+            // upload to public/images/posts
+            $image->move(public_path('/images/posts'), $image_name);
+
+
+            if($post->foto_sampul != 'default.png') {
+                if(file_exists(public_path('/images/posts/' . $post->foto_sampul))) {
+                    unlink(public_path('/images/posts/' . $post->foto_sampul));
+                }
+            }
         }
 
         $post->update([
@@ -136,10 +140,10 @@ class PostController extends Controller
             $extension = $request->file('upload')->getClientOriginalExtension();
             $fileName = $randomname . '.' . $extension;
 
-            $request->file('upload')->storeAs('public/posts_image', $fileName);
+            $request->file('upload')->move(public_path('/images/posts'), $randomname . '.' . $extension);
 
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $url = asset('storage/posts_image/'.$fileName);
+            $url = asset('images/posts/'.$fileName);
             $msg = 'Image uploaded successfully';
             $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
 

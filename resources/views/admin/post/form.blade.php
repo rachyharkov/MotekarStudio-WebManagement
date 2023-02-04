@@ -3,7 +3,7 @@
     <div class="card" style="overflow: hidden;">
         <div class="card-body">
             {{-- {{ $foto_sampul }} --}}
-            <img id="frame" src="{{ $foto_sampul ? Storage::url('public/posts_image/'.$foto_sampul) : '' }}"
+            <img id="frame" src="{{ $foto_sampul ? asset('images/posts/' . $foto_sampul) : asset('images/posts/default.png') }}" alt="Foto Sampul"
                 style="position: absolute;top:0;left:0;object-fit: cover; {{ $post_title ? 'display: block; width: 100%; height: 208px;' : 'display: none; width: 100%; height: 0px;' }}" />
             <div class="container-fluid" style="position: relative;z-index: 1;">
                 <form id="formnya" action="{{ $action }}" method="{{ $method }}" enctype="multipart/form-data">

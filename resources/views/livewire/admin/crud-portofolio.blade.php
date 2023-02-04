@@ -1,35 +1,35 @@
 <div>
     @if($page == 'index')
-        @include('admin.post.list')
+        @include('admin.portofolio.list')
     @elseif($page == 'create')
-        @include('admin.post.form')
+        @include('admin.portofolio.form')
     @elseif($page == 'edit')
-        @include('admin.post.form')
+        @include('admin.portofolio.form')
     @endif
     @push('js')
         <script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
         <script>
 
             function initDataTable() {
-                jQuery('#posts-table').DataTable({
+                jQuery('#portofolios-table').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: '{!! route('admin.post.index') !!}',
+                    ajax: '{!! route('admin.portofolio.index') !!}',
                     // disable page, entries, and next/previous buttons
                     paging: false,
                     info: false,
 
                     columns: [{
-                            data: 'post_title',
-                            name: 'post_title'
+                            data: 'portofolio_title',
+                            name: 'portofolio_title'
                         },
                         {
-                            data: 'post_author',
-                            name: 'post_author'
+                            data: 'portofolio_views',
+                            name: 'portofolio_views'
                         },
                         {
-                            data: 'post_views',
-                            name: 'post_views'
+                            data: 'portofolio_status',
+                            name: 'portofolio_status'
                         },
                         {
                             data: 'created_at',
@@ -56,42 +56,6 @@
                 });
             }
             function form_script() {
-                $("input#tags").selectize({
-                    delimiter: ",",
-                    persist: false,
-                    create: function (input) {
-                        return {
-                            value: input,
-                            text: input,
-                        };
-                    },
-                });
-
-
-                $('#post_category').selectize({
-                    // fetch data from api
-                    create: true,
-                    sortField: {
-                        field: "text",
-                        direction: "asc"
-                    },
-                    // action on create
-                    onOptionAdd: function (value, data) {
-                        // create new category
-                        $.ajax({
-                            url: "{{ route('admin.post_category.store') }}",
-                            type: "POST",
-                            data: {
-                                post_category_name: value,
-                                _token: "{{ csrf_token() }}"
-                            },
-                            success: function (response) {
-                                // set value to selectize
-                                $('#post_category')[0].selectize.setValue(response.id);
-                            }
-                        });
-                    }
-                });
 
                 class myUploadAdapter {
                     constructor(loader) {
@@ -116,7 +80,7 @@
                     _initRequest() {
                         const xhr = this.xhr = new XMLHttpRequest();
 
-                        xhr.open('POST', "{{ route('admin.post.uploadimage', ['_token' => csrf_token()]) }}", true);
+                        xhr.open('POST', "{{ route('admin.portofolio.uploadimage', ['_token' => csrf_token()]) }}", true);
                         xhr.responseType = 'json';
                     }
 
@@ -164,7 +128,7 @@
                 }
 
                 ClassicEditor
-                    .create(document.querySelector('#post_content'), {
+                    .create(document.querySelector('#portofolio_content'), {
                         extraPlugins: [simpleUploadAdapterPlugin],
                         toolbar: {
                             items: [
@@ -201,35 +165,13 @@
                     });
 
 
-                $('#foto_sampul').on('change', function(e) {
+                $('#portofolio_foto_sampul').on('change', function(e) {
                     var s = $(this)[0]
 
                     if (s.files[0].size > 2097152) {
                         s.value = ""
                         frame.style.display = "none"
                         alert("Maksimal lampiran 2 MB")
-                    } else {
-
-
-                        console.log(s.value)
-                        var ext = s.value.match(/\.([^\.]+)$/)[1];
-                        switch (ext) {
-                            case 'jpg':
-                            case 'jpeg':
-                            case 'png':
-                                var fr = new FileReader();
-                                fr.onload = function() {
-                                    document.getElementById("frame").src = fr.result;
-                                }
-                                fr.readAsDataURL(this.files[0]);
-                                frame.style.display = "block"
-                                frame.style.height = "208px"
-                                break;
-                            default:
-                                $('#frame').css('height', '0px')
-                                alert('Not allowed');
-                                this.value = '';
-                        }
                     }
                 })
             }
@@ -247,7 +189,7 @@
             $(document).on('click', '.btn-delete', function() {
                 var id = $(this).data('id');
                 Swal.fire({
-                    title: 'Hapus Post ini?',
+                    title: 'Hapus portofolio ini?',
                     text: "Anda akan kehilangan jumlah tayangan dan komentar",
                     icon: 'warning',
                     showCancelButton: true,
@@ -257,7 +199,7 @@
                     preConfirm: function() {
                         return new Promise(function(resolve) {
                             $.ajax({
-                                url: "{{ route('admin.post.destroy', ':id') }}".replace(':id', id),
+                                url: "{{ route('admin.portofolio.destroy', ':id') }}".replace(':id', id),
                                 type: 'DELETE',
                                 data: {
                                     _token: "{{ csrf_token() }}"
@@ -269,7 +211,7 @@
                                         icon: 'success',
                                         timer: 3000
                                     })
-                                    $('#posts-table').DataTable().ajax.reload();
+                                    $('#portofolios-table').DataTable().ajax.reload();
                                 },
                                 error: function(response) {
                                     Swal.fire({

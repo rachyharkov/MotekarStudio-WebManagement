@@ -2,9 +2,9 @@
 
 @php
 $uri1 = request()->segment(2);
-// echo $uri;
+$currentMenu = strtolower($name);
 $active_submenu = null;
-if ($uri1 == strtolower($name)) {
+if ($uri1 == $currentMenu) {
     $active_submenu = true;
     // echo $active_submenu;
 }
