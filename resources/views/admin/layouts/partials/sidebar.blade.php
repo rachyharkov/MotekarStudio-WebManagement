@@ -18,7 +18,7 @@
 
     <x-admin.maz-sidebar-item name="Services" :link="'#'" icon="bi bi-briefcase-fill">
         <x-admin.maz-sidebar-subitem name="Add a Service" :link="'#'" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
-        <x-admin.maz-sidebar-subitem name="Services Posted" :link="'#'" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
+        <x-admin.maz-sidebar-subitem name="Services Posted" :link="route('admin.service.index')" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
     </x-admin.maz-sidebar-item>
 
     <x-admin.maz-sidebar-item name="Page Content" :link="'#'" icon="bi bi-journal-text">

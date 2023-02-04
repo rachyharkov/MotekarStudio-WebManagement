@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InboxController;
 use App\Http\Controllers\Admin\PortofolioController;
 use App\Http\Controllers\Admin\PostCategoryController;
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -53,6 +54,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
             Route::post('/update', 'update')->name('admin.portofolio.update');
             Route::delete('/{post}/delete', 'destroy')->name('admin.portofolio.destroy');
             Route::post('/upload_image', 'upload_image')->name('admin.portofolio.uploadimage');
+        });
+
+        Route::prefix('services')->controller(ServiceController::class)->group(function() {
+            Route::get('/', 'index')->name('admin.service.index');
+            Route::post('/store', 'store')->name('admin.service.store');
+            Route::post('/update', 'update')->name('admin.service.update');
+            Route::delete('/{post}/delete', 'destroy')->name('admin.service.destroy');
+            Route::post('/upload_image', 'upload_image')->name('admin.service.uploadimage');
         });
 
         Route::prefix('post_categories')->controller(PostCategoryController::class)->group(function() {
