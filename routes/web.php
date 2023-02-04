@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\InboxController;
+use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +23,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::prefix('web_management')->group(function() {
 
@@ -29,15 +31,24 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
             Route::get('/visitor-stats', 'visitorStats')->name('admin.dashboard.visitor-stats');
         });
 
-        // Route::prefix('posts')->controller(PostController::class)->group(function() {
-        //     Route::get('/', 'index')->name('admin.posts.index');
-        //     Route::get('/create', 'create')->name('admin.posts.create');
-        //     Route::post('/store', 'store')->name('admin.posts.store');
-        //     Route::get('/{post}/edit', 'edit')->name('admin.posts.edit');
-        //     Route::put('/{post}/update', 'update')->name('admin.posts.update');
-        //     Route::delete('/{post}/delete', 'destroy')->name('admin.posts.destroy');
-        //     Route::post('/upload_image', 'upload_image')->name('admin.posts.uploadimage');
-        // });
+        Route::prefix('inbox')->controller(InboxController::class)->group(function() {
+            Route::get('/', 'index')->name('admin.inbox.index');
+        });
+
+        Route::prefix('posts')->controller(PostController::class)->group(function() {
+            Route::get('/', 'index')->name('admin.post.index');
+            Route::get('/create', 'create')->name('admin.post.create');
+            Route::post('/store', 'store')->name('admin.post.store');
+            Route::get('/{post}/edit', 'edit')->name('admin.post.edit');
+            Route::post('/update', 'update')->name('admin.post.update');
+            Route::delete('/{post}/delete', 'destroy')->name('admin.post.destroy');
+            Route::post('/upload_image', 'upload_image')->name('admin.post.uploadimage');
+            Route::get('/getpostcategories', 'get_post_categories')->name('admin.post.getpostcategories');
+        });
+
+        Route::prefix('post_categories')->controller(PostCategoryController::class)->group(function() {
+            Route::post('/store', 'store')->name('admin.post_category.store');
+        });
 
         // Route::prefix('productandservices')->controller(ProductAndServiceController::class)->group(function() {
         //     Route::get('/', 'index')->name('admin.productandservices.index');

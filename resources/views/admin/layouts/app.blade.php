@@ -16,15 +16,8 @@
 
             <div id="main" class='layout-navbar'>
                 @include('admin.layouts.partials.header')
-                <div id="main-content">
-
-                    <div class="page-heading">
-                        <div class="page-title">
-                            @yield('header')
-                        </div>
-                        @yield('content')
-                    </div>
-                    @include('admin.layouts.partials.footer')
+                <div id="main-content" style="padding-top: 0;">
+                    @yield('content')
                 </div>
             </div>
         </div>

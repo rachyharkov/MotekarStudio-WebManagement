@@ -1,7 +1,7 @@
 @props(['active', 'icon', 'link', 'name'])
 
 @php
-$uri1 = request()->segment(1);
+$uri1 = request()->segment(2);
 // echo $uri;
 $active_submenu = null;
 if ($uri1 == strtolower($name)) {
