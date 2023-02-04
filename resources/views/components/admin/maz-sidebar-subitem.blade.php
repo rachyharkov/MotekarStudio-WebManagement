@@ -2,10 +2,10 @@
 
 @php
 $active = null;
-$uri1 = last(request()->segments());
-$lastSegment = collect(explode('/', $link))->last();
+$currentUrl = url()->current();
+$thisRoute = $link;
 
-if ($uri1 == $lastSegment) {
+if ($currentUrl == $thisRoute) {
     $active = true;
 }
 

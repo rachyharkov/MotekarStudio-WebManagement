@@ -7,7 +7,9 @@ use App\Http\Controllers\Admin\InboxController;
 use App\Http\Controllers\Admin\PortofolioController;
 use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SocialmediaController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Models\SocialMedia;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,6 +64,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
             Route::post('/update', 'update')->name('admin.service.update');
             Route::delete('/{post}/delete', 'destroy')->name('admin.service.destroy');
             Route::post('/upload_image', 'upload_image')->name('admin.service.uploadimage');
+        });
+
+        Route::prefix('social_media')->controller(SocialmediaController::class)->group(function() {
+            Route::get('/', 'index')->name('admin.social_media.index');
+            Route::post('/store', 'store')->name('admin.social_media.store');
+            Route::post('/update', 'update')->name('admin.social_media.update');
+            Route::delete('/{post}/delete', 'destroy')->name('admin.social_media.destroy');
+            Route::post('/upload_image', 'upload_image')->name('admin.social_media.uploadimage');
         });
 
         Route::prefix('post_categories')->controller(PostCategoryController::class)->group(function() {
