@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SocialmediaController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Visitor\VisitorController;
 use App\Models\SocialMedia;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -24,8 +25,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('/')->controller(VisitorController::class)->group(function() {
+    Route::get('/', 'index')->name('visitor.index');
+    Route::get('/{page:slug}', 'fetch_page')->name('visitor.fetch_page');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {

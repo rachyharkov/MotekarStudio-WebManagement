@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    /* outline: 1px dashed red; */
+}
+
+header img {
+    height: 200px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+    background: #292929;
+    padding: 40px 60px 40px 60px;
+}
+
+.background-image-full-height-width {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.background-image-full-height-width img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.background-solid-fade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.856), rgba(0, 0, 0, 0.5));
+    z-index: -1;
+}
+
+body header {
+    text-align: center;
+}
+
+body main {
+    flex: 1 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body main .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+body main .content-wrapper .coming-soon-title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+
+    /* Primary Color */
+
+    color: #F68338;
+}
+
+body main .content-wrapper .coming-soon-description {
+    font-weight: 300;
+    color: #FFFFFF;
+}
+
+body main .content-wrapper .coming-soon-button-newsletter {
+    text-align: center;
+}
+
+.btn-newsletter {
+  --b: 3px;   /* border thickness */
+  --s: .45em; /* size of the corner */
+  --color: #FFFFFF;
+
+  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+  color: var(--color);
+  --_p: var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition: .3s linear, color 0s, background-color 0s;
+  outline: var(--b) solid #0000;
+  outline-offset: .6em;
+  font-size: 16px;
+
+  border: 0;
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn-newsletter:hover,
+.btn-newsletter:focus-visible{
+  --_p: 0px;
+  outline-color: var(--color);
+  outline-offset: .05em;
+  background-color: transparent !important;
+}
+
+.btn-newsletter:active {
+  background: var(--color);
+  color: #fff;
+}
+
+body footer {
+
+}
