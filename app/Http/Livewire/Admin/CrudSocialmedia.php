@@ -7,53 +7,46 @@ use Livewire\Component;
 
 class CrudSocialmedia extends Component
 {
-    public $page, $titlenya;
-    public $id_social_media, $social_media_name, $social_media_icon, $social_media_url, $social_media_clicks, $social_media_status, $created_at, $updated_at, $action, $method;
+    public $operation, $titlenya;
+    public $id_social_media, $social_media_name, $social_media_icon, $social_media_url, $social_media_type, $social_media_color_primary, $social_media_color_secondary, $social_media_clicks, $social_media_status, $created_at, $updated_at, $action, $method;
     public $socialmedias;
 
     protected $listeners = [
-        'setPage'
+        'refresh',
+        'editMode',
     ];
-
-    public function mount()
-    {
-        $this->dispatchBrowserEvent('initDatatable');
-        $this->setPage('index');
-    }
 
     public function render()
     {
+        $this->socialmedias = SocialMedia::all();
         return view('livewire.admin.crud-socialmedia');
     }
 
-    public function setPage($page, $id = null)
+    public function refresh()
     {
-        if($page == 'index') {
-            $this->page = 'index';
-            $this->titlenya = 'socialmedia List';
-            $this->dispatchBrowserEvent('initTableNya', ['message' => 'Data berhasil dihapus']);
-            $this->cleanForm();
-        }
-        if($page == 'create') {
-            $this->page = 'create';
-            $this->titlenya = 'Add New socialmedia';
-            $this->action = route('admin.social_media.store');
-            $this->method = 'POST';
-            $this->dispatchBrowserEvent('formScript');
-        }
+        $this->socialmedias = SocialMedia::all();
+        $this->dispatchBrowserEvent('refreshAllScripts');
+    }
 
-        if($page == 'edit') {
-            $this->page = 'edit';
-            $this->titlenya = 'Edit socialmedia';
-            $this->action = route('admin.social_media.update', $this->id);
-            $datasocialmedia = SocialMedia::find($id);
-            foreach($datasocialmedia->getAttributes() as $key => $value) {
-                $this->$key = $value;
-            }
-            $this->id_social_media = $id;
-            $this->method = 'POST';
-            $this->dispatchBrowserEvent('formScript');
-        }
+    function editMode($id_social_media) {
+        $findData = SocialMedia::find($id_social_media);
+        $this->dispatchBrowserEvent('editMode',[
+            'data' => [
+                'social_media_id' => $findData->id,
+                'social_media_name' => $findData->social_media_name,
+                'social_media_icon' => $findData->social_media_icon,
+                'social_media_url' => $findData->social_media_url,
+                'social_media_type' => $findData->social_media_type,
+                'social_media_color_primary' => $findData->social_media_color_primary,
+                'social_media_color_secondary' => $findData->social_media_color_secondary,
+                'social_media_clicks' => $findData->social_media_clicks,
+                'social_media_status' => $findData->social_media_status,
+                'created_at' => $findData->created_at,
+                'updated_at' => $findData->updated_at,
+                'action' => route('admin.social_media.update'),
+                'method' => 'POST',
+            ]
+        ]);
     }
 
     public function cleanForm()
@@ -62,6 +55,9 @@ class CrudSocialmedia extends Component
         $this->social_media_name = null;
         $this->social_media_icon = null;
         $this->social_media_url = null;
+        $this->social_media_type = null;
+        $this->social_media_color_primary = null;
+        $this->social_media_color_secondary = null;
         $this->social_media_clicks = null;
         $this->social_media_status = null;
         $this->created_at = null;

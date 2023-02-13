@@ -34,6 +34,9 @@ class SocialmediaController extends Controller
             'social_media_name' => $request->social_media_name,
             'social_media_icon' => $request->social_media_icon,
             'social_media_url' => $request->social_media_url,
+            'social_media_type' => $request->social_media_type,
+            'social_media_color_primary' => $request->social_media_color_primary,
+            'social_media_color_secondary' => $request->social_media_color_secondary,
             'social_media_clicks' => 0,
             'social_media_status' => 1,
             'created_at' => date('Y-m-d H:i:s'),
@@ -59,6 +62,9 @@ class SocialmediaController extends Controller
             'social_media_name' => $request->social_media_name,
             'social_media_icon' => $request->social_media_icon,
             'social_media_url' => $request->social_media_url,
+            'social_media_type' => $request->social_media_type,
+            'social_media_color_primary' => $request->social_media_color_primary,
+            'social_media_color_secondary' => $request->social_media_color_secondary,
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 

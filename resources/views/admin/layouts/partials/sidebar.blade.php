@@ -4,8 +4,6 @@
 
     <x-admin.maz-sidebar-item name="Dashboard" :link="route('admin.dashboard')" icon="bi bi-grid-fill"></x-admin.maz-sidebar-item>
 
-    <x-admin.maz-sidebar-item name="Inbox" :link="route('admin.inbox.index')" icon="bi bi-envelope-fill"></x-admin.maz-sidebar-item>
-
     <x-admin.maz-sidebar-item name="Posts" :link="'#'" icon="bi bi-journal-text">
         <x-admin.maz-sidebar-subitem name="New Post" :link="'#'" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
         <x-admin.maz-sidebar-subitem name="Posts" :link="route('admin.post.index')" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
@@ -22,13 +20,13 @@
     </x-admin.maz-sidebar-item>
 
     <x-admin.maz-sidebar-item name="Page Content" :link="'#'" icon="bi bi-journal-text">
-        <x-admin.maz-sidebar-subitem name="Social Media" :link="route('admin.social_media.index')" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
         <x-admin.maz-sidebar-subitem name="Testimonial" :link="'#'" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
         <x-admin.maz-sidebar-subitem name="Comparison" :link="'#'" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
         <x-admin.maz-sidebar-subitem name="FAQ" :link="'#'" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
     </x-admin.maz-sidebar-item>
 
     <x-admin.maz-sidebar-item name="Web Setting" :link="'#'" icon="bi bi-journal-text">
+        <x-admin.maz-sidebar-subitem name="Social Media" :link="route('admin.social_media.index')" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
         <x-admin.maz-sidebar-subitem name="SEO" :link="'#'" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
         <x-admin.maz-sidebar-subitem name="Contact" :link="'#'" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
         <x-admin.maz-sidebar-subitem name="Banner" :link="'#'" icon="bi bi-person"></x-admin.maz-sidebar-subitem>

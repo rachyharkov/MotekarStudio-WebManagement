@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/save_anu', function (Request $request) {
+    echo "Hello World";
+    echo $request->input('name');
+    echo $request->input('email');
+    echo $request->input('password');
+
+    // Mau semuanya? Bisa juga
+    echo $request->all();
+});
