@@ -22,7 +22,7 @@
     <x-admin.maz-sidebar-item name="Page Content" :link="'#'" icon="bi bi-journal-text">
         <x-admin.maz-sidebar-subitem name="Testimonial" :link="'#'" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
         <x-admin.maz-sidebar-subitem name="Comparison" :link="'#'" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
-        <x-admin.maz-sidebar-subitem name="FAQ" :link="'#'" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
+        <x-admin.maz-sidebar-subitem name="FAQ" :link="route('admin.faqs.index')" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
     </x-admin.maz-sidebar-item>
 
     <x-admin.maz-sidebar-item name="Web Setting" :link="'#'" icon="bi bi-journal-text">

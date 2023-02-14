@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\InboxController;
 use App\Http\Controllers\Admin\PortofolioController;
 use App\Http\Controllers\Admin\PostCategoryController;
@@ -83,7 +84,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
         Route::prefix('seo_settings')->controller(SeoSettingController::class)->group(function() {
             Route::get('/', 'index')->name('admin.seo_setting.index');
-            Route::post('/update', 'update')->name('admin.seo_setting.update');
+        });
+
+        Route::prefix('faqs')->controller(FaqController::class)->group(function() {
+            Route::get('/', 'index')->name('admin.faqs.index');
         });
     });
 });
