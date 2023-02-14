@@ -1,7 +1,5 @@
-{{-- please generate a full html css coming soon page --}}
-
 <!DOCTYPE html>
-<html lang="id">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -9,6 +7,7 @@
     <title>Motekar Studio</title>
     <link rel="shortcut icon" href="{{ asset('visitor_asset/images/favicon.ico') }}" type="image/x-icon">
     <link rel="canonical" href="{{ env('APP_URL') }}">
+    <link rel="image_src" href="{{ asset('visitor_asset/images/motekar-studio-logo.png') }}">
     <meta property="og:site_name" content="Motekar Studio">
     <meta property="og:title" content="Motekar Studio">
     <meta property="og:url" content="{{env('APP_URL')}}">
@@ -21,7 +20,6 @@
     <meta itemprop="url" content="{{ env('APP_URL') }}">
     <meta itemprop="description" content="Motekar is A Team of talented video editors who are able to strip the heavy lifting from most production houses.">
     <meta itemprop="thumbnailUrl" content="{{ asset('visitor_asset/images/motekar-studio-logo.png') }}">
-    <link rel="image_src" href="{{ asset('visitor_asset/images/motekar-studio-logo.png') }}">
     <meta itemprop="image" content="{{ asset('visitor_asset/images/motekar-studio-logo.png') }}">
     <meta name="twitter:title" content="Motekar Studio">
     <meta name="twitter:url" content="{{ env('APP_URL') }}">

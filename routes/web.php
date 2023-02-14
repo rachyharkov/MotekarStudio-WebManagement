@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InboxController;
 use App\Http\Controllers\Admin\PortofolioController;
 use App\Http\Controllers\Admin\PostCategoryController;
+use App\Http\Controllers\Admin\SeoSettingController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SocialmediaController;
 use App\Http\Controllers\Auth\AuthController;
@@ -38,9 +39,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
             Route::get('/visitor-stats', 'visitorStats')->name('admin.dashboard.visitor-stats');
         });
 
-        Route::prefix('inbox')->controller(InboxController::class)->group(function() {
-            Route::get('/', 'index')->name('admin.inbox.index');
-        });
+        // Route::prefix('inbox')->controller(InboxController::class)->group(function() {
+        //     Route::get('/', 'index')->name('admin.inbox.index');
+        // });
 
         Route::prefix('posts')->controller(PostController::class)->group(function() {
             Route::get('/', 'index')->name('admin.post.index');
@@ -78,6 +79,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
         Route::prefix('post_categories')->controller(PostCategoryController::class)->group(function() {
             Route::post('/store', 'store')->name('admin.post_category.store');
+        });
+
+        Route::prefix('seo_settings')->controller(SeoSettingController::class)->group(function() {
+            Route::get('/', 'index')->name('admin.seo_setting.index');
+            Route::post('/update', 'update')->name('admin.seo_setting.update');
         });
     });
 });

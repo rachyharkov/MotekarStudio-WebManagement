@@ -27,7 +27,7 @@
 
     <x-admin.maz-sidebar-item name="Web Setting" :link="'#'" icon="bi bi-journal-text">
         <x-admin.maz-sidebar-subitem name="Social Media" :link="route('admin.social_media.index')" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
-        <x-admin.maz-sidebar-subitem name="SEO" :link="'#'" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
+        <x-admin.maz-sidebar-subitem name="SEO" :link="route('admin.seo_setting.index')" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
         <x-admin.maz-sidebar-subitem name="Contact" :link="'#'" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
         <x-admin.maz-sidebar-subitem name="Banner" :link="'#'" icon="bi bi-person"></x-admin.maz-sidebar-subitem>
     </x-admin.maz-sidebar-item>
