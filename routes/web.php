@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
@@ -88,6 +89,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
         Route::prefix('faqs')->controller(FaqController::class)->group(function() {
             Route::get('/', 'index')->name('admin.faqs.index');
+        });
+
+        Route::prefix('contact')->controller(ContactController::class)->group(function() {
+            Route::get('/', 'index')->name('admin.contact.index');
         });
     });
 });
